@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-center mt-3">{{title}}</h2>
+
+    <h6 class="text-center">
+      Please enter your name and pick the Sectors you are currently involved in.
+    </h6>
+
+    <form [formGroup]="form" class="col-md-6 mx-auto" (ngSubmit)="onSubmit()">
+     
+      <input type="hidden" formControlName="id" />
+
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          id="name"
+          placeholder="Enter your name"
+          required=
+        />
+        <div
+          *ngIf="formControl['name'].invalid && (submitted || formControl['name'].touched)"
+          class="alert alert-danger"
+        >
+            <div *ngIf="formControl['name'].errors?.['required']">Name is required.</div>
+            <div *ngIf="formControl['name'].errors?.['minlength']">
+              Name must be at least 2 characters long.
+            </div> 
+        </div>
+            
+      </div>
+
+      <div class="form-group">
+          <label for="sectors">Sectors: </label>
+          <nz-tree-select
+            required
+            id="sectors"
+            class="col-md-12"
+            nzPlaceHolder="Select a sector"
+            formControlName="sectors"
+            [nzMaxTagCount]="3"
+            [nzMaxTagPlaceholder]="omittedPlaceHolder"
+            [nzNodes]="nodes"
+            [nzDefaultExpandAll]="true"
+            [nzAllowClear]="false"
+            nzShowSearch
+            nzVirtualHeight="250px"
+            [nzMultiple]="true"
+          ></nz-tree-select>
+          <ng-template #omittedPlaceHolder let-omittedValues
+            >and {{ omittedValues.length }} more...</ng-template
+          >
+
+          <div *ngIf="formControl['sectors'].invalid && (submitted || formControl['sectors'].touched)"  class="alert alert-danger">
+              <div *ngIf="formControl['sectors'].errors?.['required']">Sectors are required.</div>
+          </div>
+      </div>
+
+      <br />
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" formControlName="agreeToTerms" type="checkbox" id="gridCheck" />
+          <label class="form-check-label" for="gridCheck"> Agree to Terms</label>
+        </div>
+
+        <div
+          *ngIf="formControl['agreeToTerms'].invalid && (submitted|| formControl['agreeToTerms'].touched)"
+          class="alert alert-danger"
+        >
+
+          <div *ngIf="formControl['agreeToTerms'].errors?.['required']">Please Agree to terms</div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary mx-auto btn-lg btn-block"
+        [disabled]="!form.valid" 
+      >
+       {{buttonMessage}}
+      </button>
+
+      <button
+        (click)="onReset()"
+        type="reset"
+        class="btn btn-success mx-auto btn-lg btn-block"
+      >
+        Reset
+      </button>
+
+      <br />
+    </form>
+  </div>
+</div>
