@@ -54,6 +54,12 @@ export class HomeComponent implements OnInit {
     return this.sectorService.getAllSectors().subscribe(
       data => {
         this.nodes = this.constructTreeData(data);
+      },
+      error => {
+        //process error here
+        console.log('Could Not fullfill the request');
+        console.log(error.message);
+
       }
     )
   }
@@ -67,6 +73,11 @@ export class HomeComponent implements OnInit {
             this.buttonMessage ='Update'
         }      
         console.log(data);
+      },
+      error =>{
+        //process error here
+        console.log('Could Not fullfill the request');
+        console.log(error.message);
       }
     )
   }
@@ -78,6 +89,11 @@ export class HomeComponent implements OnInit {
             this.setFormValues(response.body)
         }      
         console.log(data);
+      },
+      error =>{
+        //process error here
+          console.log('Could Not fullfill the request');
+          console.log(error);
       }
     )
   }
