@@ -48,8 +48,8 @@ public class EntryController {
 
     @GetMapping("/entries/{id}")
     public EntityModel<EntryGetDto> getEntryById(@PathVariable("id") long id) {
-        Entry entry = entryService.getEntryById(id);
-        EntryGetDto entryGetDto = mapStructMapper.entryToEntryGetDto(entry);
+
+        EntryGetDto entryGetDto = mapStructMapper.entryToEntryGetDto(entryService.getEntryById(id));
         EntityModel entityModel = EntityModel.of(entryGetDto);
 
         //generating the link to all entries while referencing the method

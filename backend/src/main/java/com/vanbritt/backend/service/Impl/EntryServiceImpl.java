@@ -32,10 +32,8 @@ public class EntryServiceImpl implements EntryService {
 
     @Override
     public Entry getEntryById(Long id) {
-        Optional<Entry> entry = entryRepository.findById(id);
-        if (!entry.isPresent())
-            throw new ResourceNotFoundException("Entry not Found");
-        return entry.get();
+        return entryRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Entry not Found with id: " + id));
     }
 
     @Override
@@ -45,27 +43,27 @@ public class EntryServiceImpl implements EntryService {
 
     @Override
     public Entry saveEntry(EntryPostDto entryPostDto) {
-        Entry entry =null;
+        Entry entry = null;
 
-        if(entryPostDto.getId() != null){
-            Optional<Entry> optionalEntry =  entryRepository.findById(entryPostDto.getId());
-            if(!optionalEntry.isPresent())
-                throw new ResourceNotFoundException("Entry Not Found");
-            entry = optionalEntry.get();
+        if (entryPostDto.getId() != null) {
+            //Checking If the provided entry with id exist in the database
+            entry = entryRepository.findById(entryPostDto.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Entry Not Found with id: " + entryPostDto.getId()));
+
             entry.setName(entryPostDto.getName());
             entry.setAgreeToTerms(entryPostDto.isAgreeToTerms());
-        }else {
+
+        } else {
             entry = mapStructMapper.entryPostDtoToEntry(entryPostDto);
         }
-        Set<Sector> sectors = entryPostDto.getSectors().stream().map(id -> {
-            Optional<Sector> sector = sectorRepository.findById(id);
-            if (!sector.isPresent())
-                throw new ResourceNotFoundException("Sector not found exception");
-            return sector.get();
-        }).collect(Collectors.toSet());
+        //Verifying if every supplied sectors exist in the database
+        Set<Sector> sectors = entryPostDto.getSectors()
+                .stream()
+                .map(id -> sectorRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Sector not found with id: " + id)))
+                .collect(Collectors.toSet());
 
         entry.setSectors(sectors);
-
         return entryRepository.save(entry);
     }
 
