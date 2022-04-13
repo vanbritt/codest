@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EntryDto {
     private Long id;
 

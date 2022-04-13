@@ -8,15 +8,11 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SectorDto {
     private Long id;
-
-    //private SectorSlimDto parentSector;
 
     @NotNull
     private String name;

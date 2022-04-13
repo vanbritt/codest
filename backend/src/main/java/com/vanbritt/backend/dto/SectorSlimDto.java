@@ -5,11 +5,9 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SectorSlimDto {
     private Long id;
     @NotNull

@@ -6,11 +6,9 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EntryGetDto {
     private Long id;
 

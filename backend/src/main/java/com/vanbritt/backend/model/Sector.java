@@ -13,11 +13,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "sectors")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@EqualsAndHashCode(exclude={"subSectors"})
 public class Sector {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
