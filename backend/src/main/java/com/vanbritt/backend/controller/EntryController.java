@@ -3,7 +3,6 @@ package com.vanbritt.backend.controller;
 import com.vanbritt.backend.dto.*;
 import com.vanbritt.backend.mapstruct.mappers.MapStructMapper;
 import com.vanbritt.backend.model.Entry;
-import com.vanbritt.backend.model.Sector;
 import com.vanbritt.backend.service.api.EntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -11,10 +10,8 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -39,7 +36,6 @@ public class EntryController {
     public ResponseEntity<EntryGetDto> addEntry(@RequestBody @Valid EntryPostDto entryPostDto) {
         EntryGetDto savedEntry = mapStructMapper.entryToEntryGetDto(entryService.saveEntry(entryPostDto));
         return new ResponseEntity<EntryGetDto>(savedEntry, HttpStatus.CREATED);
-        //return null;
     }
 
 
@@ -48,15 +44,12 @@ public class EntryController {
         EntryGetDto updatedEntry = mapStructMapper.entryToEntryGetDto(entryService.saveEntry(entryPostDto));
 
         return new ResponseEntity<EntryGetDto>(updatedEntry, HttpStatus.OK);
-        //return null;
     }
 
     @GetMapping("/entries/{id}")
     public EntityModel<EntryGetDto> getEntryById(@PathVariable("id") long id) {
         Entry entry = entryService.getEntryById(id);
         EntryGetDto entryGetDto = mapStructMapper.entryToEntryGetDto(entry);
-        //if(!entry.isPresent())
-        //throw new EntryNotFoundException("id- "+id);
         EntityModel entityModel = EntityModel.of(entryGetDto);
 
         //generating the link to all entries while referencing the method
@@ -66,7 +59,6 @@ public class EntryController {
         entityModel.add(linkBuilder.withRel("all-entries"));
 
         return entityModel;
-        //return null;
     }
 
     @GetMapping("/entries/{id}/sectors")
@@ -74,7 +66,6 @@ public class EntryController {
         EntryGetDto entry = mapStructMapper.entryToEntryGetDto(entryService.getEntryById(id));
 
         return new ResponseEntity<>(entry.getSectors(), HttpStatus.OK);
-        // return null;
     }
 
 }

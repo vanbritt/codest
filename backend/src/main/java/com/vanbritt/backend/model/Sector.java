@@ -1,13 +1,10 @@
 package com.vanbritt.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
@@ -16,9 +13,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "sectors")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Getter
 @Setter
 public class Sector {
@@ -38,11 +35,6 @@ public class Sector {
     @OneToMany(mappedBy = "parentSector", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Sector> subSectors = new HashSet<>();
-
-//    @ManyToMany(mappedBy = "sectors", fetch = FetchType.LAZY)
-//    @JsonIgnore
-//    private Set<Entry> entries = new HashSet<>();
-
 
    public Sector addSubSector(Sector subSector) {
         if(this.subSectors==null)

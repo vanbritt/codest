@@ -2,10 +2,6 @@ package com.vanbritt.backend.controller;
 
 import com.vanbritt.backend.dto.SectorDto;
 import com.vanbritt.backend.mapstruct.mappers.MapStructMapper;
-import com.vanbritt.backend.model.Entry;
-import com.vanbritt.backend.model.Sector;
-import com.vanbritt.backend.repository.EntryRepository;
-import com.vanbritt.backend.repository.SectorRepository;
 import com.vanbritt.backend.service.api.SectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,8 +19,6 @@ import java.util.List;
 public class SectorController {
     @Autowired
     private SectorService sectorService;
-    @Autowired
-    private  SectorRepository sectorRepository;
     @Autowired
     private MapStructMapper mapStructMapper;
 
