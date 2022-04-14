@@ -1,6 +1,8 @@
 spring:
+  application:
+    name: backend
   datasource:
-    url: jdbc:mysql://localhost:3306/backend_db?useSSL=false
+    url: jdbc:mysql://mysqldb:3307/backend_db?useSSL=false
     username: root
     password: root
     initialization-mode: always
@@ -10,5 +12,5 @@ spring:
     defer-datasource-initialization: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true

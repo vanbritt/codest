@@ -9,6 +9,7 @@ import Entry from 'src/app/model/Entry';
 import Sector from 'src/app/model/Sector';
 import { EntryService } from 'src/app/services/entry.service';
 import { SectorService } from 'src/app/services/sector.service';
+import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   submitted: boolean = false;
   title: string = 'Create An Entry';
   buttonMessage: string = 'Save';
-  nodes: any = [];
+  nodes: NzTreeNodeOptions[]=[] ;
   form!: FormGroup;
   sectorsList:Sector[] =[];
 
