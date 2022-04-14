@@ -1,12 +1,9 @@
-
-
 ### STAGE 1: Build ###
-FROM node:14.18-slim AS build
+FROM node:14.18.3-alpine AS build
 WORKDIR /usr/src/app
-COPY package*.json ./
+COPY package.json ./
 RUN npm install
 COPY . .
-RUN npm audit fix --force
 RUN npm run build
 
 ### STAGE 2: Run ###
