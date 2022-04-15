@@ -45,6 +45,13 @@
 
 ### Building and running
 
+#### RUNNING IN A DOCKER ENVIRONMENT
+- Docker can be downloaded from here https://docs.docker.com/get-docker
+- From the root directory run the following command : `docker-compose up -d` 
+- The above command will download the required dependencies, build and kickstart the whole application stack 
+- To stop the application you can run the following command : `docker-compose down`
+
+
 #### Backend Application: built with SpringBoot v2.6.6
 
 - JDK Version : java 8
@@ -72,5 +79,3 @@
 - To run the application, run `ng serve --open` from `frontend` application 
 - Frontend will start at `http:localhost:4200` by default 
         
-
-
